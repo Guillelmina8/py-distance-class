@@ -1,4 +1,3 @@
-from __future__ import division
 from __future__ import annotations
 
 
@@ -13,10 +12,9 @@ class Distance:
         return f"Distance(km={self.km})"
 
     def __add__(self, other: float | int | Distance) -> Distance:
-        if isinstance(other, Distance):
-            return Distance(self.km + other.km)
-        else:
+        if not isinstance(other, Distance):
             return Distance(self.km + other)
+        return Distance(self.km + other.km)
 
     def __iadd__(self, other: float | int | Distance) -> Distance:
         if isinstance(other, Distance):
@@ -32,31 +30,27 @@ class Distance:
         return Distance(round((self.km / other), 2))
 
     def __lt__(self, other: Distance | float | int) -> bool:
-        if isinstance(other, Distance):
-            return self.km < other.km
-        else:
+        if not isinstance(other, Distance):
             return self.km < other
+        return self.km < other.km
 
     def __gt__(self, other: Distance | float | int) -> bool:
-        if isinstance(other, Distance):
-            return self.km > other.km
-        else:
+        if not isinstance(other, Distance):
             return self.km > other
+        return self.km > other.km
 
     def __eq__(self, other: Distance | float | int) -> bool:
-        if isinstance(other, Distance):
-            return self.km == other.km
-        else:
+        if not isinstance(other, Distance):
             return self.km == other
+        return self.km == other.km
 
     def __le__(self, other: Distance | float | int) -> bool:
-        if isinstance(other, Distance):
-            return self.km <= other.km
-        else:
+        if not isinstance(other, Distance):
             return self.km <= other
+        return self.km <= other.km
 
     def __ge__(self, other: Distance | float | int) -> bool:
-        if isinstance(other, Distance):
-            return self.km >= other.km
-        else:
+
+        if not isinstance(other, Distance):
             return self.km >= other
+        return self.km >= other.km
